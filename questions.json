@@ -1,0 +1,27 @@
+[
+  {
+    "question": "What does CPU stand for?",
+    "options": ["Central Processing Unit", "Computer Personal Unit", "Central Performance Unit", "Control Processing Unit"],
+    "answer": "Central Processing Unit"
+  },
+  {
+    "question": "Which of the following is a non-volatile memory?",
+    "options": ["RAM", "ROM", "Cache", "Register"],
+    "answer": "ROM"
+  },
+  {
+    "question": "Which of these is NOT a valid C data type?",
+    "options": ["int", "real", "double", "char"],
+    "answer": "real"
+  },
+  {
+    "question": "What is the correct order of a typical C program structure?",
+    "options": ["Preprocessor directives → main() function → variable declarations", "main() function → Preprocessor directives → variable declarations", "Variable declarations → Preprocessor directives → main() function", "main() function → variable declarations → Preprocessor directives"],
+    "answer": "Preprocessor directives → main() function → variable declarations"
+  },
+  {
+    "question": "Which keyword is used to define a constant in C?",
+    "options": ["define", "const", "constant", "let"],
+    "answer": "const"
+  }
+]
