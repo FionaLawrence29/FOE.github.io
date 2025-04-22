@@ -62,6 +62,23 @@ function loadQuestion() {
     optionsEl.appendChild(btn);
   });
 
+  // Start timer and update progress
+  startTimer();
+
+  // Update progress bar
+  updateProgress();
+}
+
+function updateProgress() {
+  const progress = (currentQuestion / quizData.length) * 100;
+  document.getElementById("progress-bar").style.width = `${progress}%`;
+
+  // Update percentage text
+  const percentage = Math.round((score / quizData.length) * 100);
+  document.getElementById("percentage").textContent = `Progress: ${Math.round(progress)}% | Score: ${percentage}%`;
+}
+
+
   startTimer();
 }
 
