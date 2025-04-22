@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Progress Bar Section -->
+  <div id="progress-container" style="width: 100%; height: 20px; background-color: #f3f3f3; margin-bottom: 20px;">
+    <div id="progress-bar" style="height: 100%; background-color: #4caf50; width: 0%;"></div>
+  </div>
+  <p id="percentage"></p>
+
+  <!-- Question and Options Section -->
   <div id="question-container">
     <p id="timer">Time left: 15s</p>
     <h2 id="question">Question will appear here</h2>
@@ -14,12 +21,12 @@
     <button id="next-btn" disabled>Next</button>
   </div>
 
+  <!-- Result Section -->
   <div id="result" style="display:none;">
     <h3>Your score: <span id="score"></span></h3>
+    <p id="percentage-result"></p>
     <a href="leaderboard.html"><button>View Leaderboard</button></a>
   </div>
-
-  <div id="leaderboard" style="margin-top: 20px;"></div>
 
   <script src="script.js"></script>
 </body>
