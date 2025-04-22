@@ -1,3 +1,5 @@
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/YOUR-CSV-LINK-HERE/pub?output=csv';
+
 let quizData = [];
 let currentQuestion = 0;
 let score = 0;
@@ -11,16 +13,28 @@ const resultEl = document.getElementById("result");
 const scoreEl = document.getElementById("score");
 const timerEl = document.getElementById("timer");
 
-fetch('questions.json')
-  .then(response => response.json())
-  .then(data => {
-    quizData = data;
+fetch(SHEET_URL)
+  .then(res => res.text())
+  .then(csvText => {
+    quizData = parseCSV(csvText);
     loadQuestion();
   })
-  .catch(error => {
-    questionEl.textContent = "Failed to load questions.";
-    console.error("Error loading questions:", error);
+  .catch(err => {
+    questionEl.textContent = "Error loading questions.";
+    console.error(err);
   });
+
+function parseCSV(text) {
+  const lines = text.trim().split("\n");
+  const headers = lines[0].split(",");
+  return lines.slice(1).map(line => {
+    const values = line.split(",");
+    const question = values[0];
+    const options = values[1].split(";").map(opt => opt.trim());
+    const answer = values[2].trim();
+    return { question, options, answer };
+  });
+}
 
 function startTimer() {
   timeLeft = 15;
@@ -96,4 +110,38 @@ function showResult() {
   document.getElementById("question-container").style.display = "none";
   resultEl.style.display = "block";
   scoreEl.textContent = `${score} / ${quizData.length}`;
+  
+  // Prompt for name and save score
+  const name = prompt("Enter your name to save your score:");
+  if (name) {
+    saveScore(name, score);
+  }
+
+  // Show the leaderboard
+  displayLeaderboard();
 }
+
+function saveScore(name, score) {
+  let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  
+  // Add new score and sort by descending order
+  leaderboard.push({ name, score });
+  leaderboard.sort((a, b) => b.score - a.score); // Sort in descending order of score
+
+  // Keep only top 5 scores
+  leaderboard = leaderboard.slice(0, 5);
+  
+  localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+}
+
+function displayLeaderboard() {
+  const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  const leaderboardEl = document.getElementById("leaderboard");
+  
+  leaderboardEl.innerHTML = "<h2>Leaderboard</h2>";
+  
+  leaderboard.forEach((entry, index) => {
+    leaderboardEl.innerHTML += `<p>${index + 1}. ${entry.name} - ${entry.score}</p>`;
+  });
+}
+
