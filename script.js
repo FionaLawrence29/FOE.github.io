@@ -1,5 +1,3 @@
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/YOUR-CSV-LINK-HERE/pub?output=csv';
-
 let quizData = [];
 let currentQuestion = 0;
 let score = 0;
@@ -12,29 +10,21 @@ const nextBtn = document.getElementById("next-btn");
 const resultEl = document.getElementById("result");
 const scoreEl = document.getElementById("score");
 const timerEl = document.getElementById("timer");
+const leaderboardEl = document.getElementById("leaderboard");
+const progressBar = document.getElementById("progress-bar");
+const percentageEl = document.getElementById("percentage");
 
-fetch(SHEET_URL)
-  .then(res => res.text())
-  .then(csvText => {
-    quizData = parseCSV(csvText);
+// Load questions from questions.json
+fetch('questions.json')
+  .then(response => response.json())
+  .then(data => {
+    quizData = data;
     loadQuestion();
   })
-  .catch(err => {
+  .catch(error => {
     questionEl.textContent = "Error loading questions.";
-    console.error(err);
+    console.error("Error loading questions.json:", error);
   });
-
-function parseCSV(text) {
-  const lines = text.trim().split("\n");
-  const headers = lines[0].split(",");
-  return lines.slice(1).map(line => {
-    const values = line.split(",");
-    const question = values[0];
-    const options = values[1].split(";").map(opt => opt.trim());
-    const answer = values[2].trim();
-    return { question, options, answer };
-  });
-}
 
 function startTimer() {
   timeLeft = 15;
@@ -58,31 +48,25 @@ function loadQuestion() {
   current.options.forEach(option => {
     const btn = document.createElement("button");
     btn.textContent = option;
-    btn.onclick = () => selectAnswer(btn, current.answer);
+    btn.classList.add("option-btn");
+    btn.onclick = () => selectAnswer(btn, current.answer, current.explanation);
     optionsEl.appendChild(btn);
   });
 
   // Start timer and update progress
   startTimer();
-
-  // Update progress bar
   updateProgress();
 }
 
 function updateProgress() {
   const progress = (currentQuestion / quizData.length) * 100;
-  document.getElementById("progress-bar").style.width = `${progress}%`;
+  progressBar.style.width = `${progress}%`;
 
-  // Update percentage text
   const percentage = Math.round((score / quizData.length) * 100);
-  document.getElementById("percentage").textContent = `Progress: ${Math.round(progress)}% | Score: ${percentage}%`;
+  percentageEl.textContent = `Progress: ${Math.round(progress)}% | Score: ${percentage}%`;
 }
 
-
-  startTimer();
-}
-
-function selectAnswer(button, correctAnswer) {
+function selectAnswer(button, correctAnswer, explanation) {
   clearInterval(timer);
 
   const buttons = optionsEl.querySelectorAll("button");
@@ -99,6 +83,16 @@ function selectAnswer(button, correctAnswer) {
     score++;
   }
 
+  // Show explanation
+  if (explanation) {
+    const explainEl = document.createElement("p");
+    explainEl.textContent = `💡 Explanation: ${explanation}`;
+    explainEl.style.marginTop = "10px";
+    explainEl.style.fontStyle = "italic";
+    explainEl.style.color = "#666";
+    optionsEl.appendChild(explainEl);
+  }
+
   nextBtn.disabled = false;
 }
 
@@ -110,6 +104,17 @@ function lockOptions() {
       btn.style.backgroundColor = "#c8e6c9";
     }
   });
+
+  const explanation = quizData[currentQuestion].explanation;
+  if (explanation) {
+    const explainEl = document.createElement("p");
+    explainEl.textContent = `⏰ Time's up! Explanation: ${explanation}`;
+    explainEl.style.marginTop = "10px";
+    explainEl.style.fontStyle = "italic";
+    explainEl.style.color = "#666";
+    optionsEl.appendChild(explainEl);
+  }
+
   nextBtn.disabled = false;
 }
 
@@ -124,52 +129,37 @@ nextBtn.addEventListener("click", () => {
   updateProgress();
 });
 
-
 function showResult() {
   document.getElementById("question-container").style.display = "none";
   resultEl.style.display = "block";
   scoreEl.textContent = `${score} / ${quizData.length}`;
-  
-  // Update the final progress bar
+
   const finalProgress = (currentQuestion / quizData.length) * 100;
-  document.getElementById("progress-bar").style.width = `${finalProgress}%`;
+  progressBar.style.width = `${finalProgress}%`;
 
-  // Display the final percentage score
   const finalPercentage = Math.round((score / quizData.length) * 100);
-  document.getElementById("percentage").textContent = `You scored: ${finalPercentage}%`;
+  percentageEl.textContent = `You scored: ${finalPercentage}%`;
 
-  // Prompt for name and save score
   const name = prompt("Enter your name to save your score:");
   if (name) {
     saveScore(name, score);
   }
 
-  // Show the leaderboard
   displayLeaderboard();
 }
 
-
 function saveScore(name, score) {
   let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-  
-  // Add new score and sort by descending order
   leaderboard.push({ name, score });
-  leaderboard.sort((a, b) => b.score - a.score); // Sort in descending order of score
-
-  // Keep only top 5 scores
+  leaderboard.sort((a, b) => b.score - a.score);
   leaderboard = leaderboard.slice(0, 5);
-  
   localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 }
 
 function displayLeaderboard() {
   const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-  const leaderboardEl = document.getElementById("leaderboard");
-  
-  leaderboardEl.innerHTML = "<h2>Leaderboard</h2>";
-  
+  leaderboardEl.innerHTML = "<h2>🏆 Leaderboard</h2>";
   leaderboard.forEach((entry, index) => {
     leaderboardEl.innerHTML += `<p>${index + 1}. ${entry.name} - ${entry.score}</p>`;
   });
 }
-
