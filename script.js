@@ -148,6 +148,7 @@ function showResult() {
   displayLeaderboard();
 }
 
+
 function saveScore(name, score) {
   let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
   
