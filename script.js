@@ -1,31 +1,4 @@
-const quizData = [
-  {
-    question: "What does CPU stand for?",
-    options: ["Central Processing Unit", "Computer Personal Unit", "Central Performance Unit", "Control Processing Unit"],
-    answer: "Central Processing Unit"
-  },
-  {
-    question: "Which of the following is a non-volatile memory?",
-    options: ["RAM", "ROM", "Cache", "Register"],
-    answer: "ROM"
-  },
-  {
-    question: "What is the function of an ALU?",
-    options: ["Store data", "Perform arithmetic and logic operations", "Manage memory", "Control input/output devices"],
-    answer: "Perform arithmetic and logic operations"
-  },
-  {
-    question: "Which component manages communication between hardware and software?",
-    options: ["ALU", "Operating System", "Compiler", "BIOS"],
-    answer: "Operating System"
-  },
-  {
-    question: "Which of these is NOT an input device?",
-    options: ["Mouse", "Keyboard", "Monitor", "Scanner"],
-    answer: "Monitor"
-  }
-];
-
+let quizData = [];
 let currentQuestion = 0;
 let score = 0;
 let timer;
@@ -38,6 +11,17 @@ const resultEl = document.getElementById("result");
 const scoreEl = document.getElementById("score");
 const timerEl = document.getElementById("timer");
 
+fetch('questions.json')
+  .then(response => response.json())
+  .then(data => {
+    quizData = data;
+    loadQuestion();
+  })
+  .catch(error => {
+    questionEl.textContent = "Failed to load questions.";
+    console.error("Error loading questions:", error);
+  });
+
 function startTimer() {
   timeLeft = 15;
   timerEl.textContent = `Time left: ${timeLeft}s`;
@@ -46,7 +30,7 @@ function startTimer() {
     timerEl.textContent = `Time left: ${timeLeft}s`;
     if (timeLeft <= 0) {
       clearInterval(timer);
-      lockOptions(); // disable choices
+      lockOptions();
     }
   }, 1000);
 }
@@ -113,5 +97,3 @@ function showResult() {
   resultEl.style.display = "block";
   scoreEl.textContent = `${score} / ${quizData.length}`;
 }
-
-loadQuestion();
