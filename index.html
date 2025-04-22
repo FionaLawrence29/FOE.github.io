@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Computer Engineering Quiz</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentals of Computer Engineering Quiz</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="quiz-container">
-    <h1>Fundamentals of Computer Engineering Quiz</h1>
-       <div id="question-container">
-          <p id="timer">Time left: 15s</p>
-      <p id="question">Loading...</p>
-      <div id="options"></div>
-      <button id="next-btn">Next</button>
-    </div>
-    <div id="result" style="display:none;">
-      <h2>Your Score: <span id="score"></span></h2>
-      <button onclick="location.reload()">Restart Quiz</button>
-    </div>
+  <div id="question-container">
+    <p id="timer">Time left: 15s</p>
+    <h2 id="question">Question will appear here</h2>
+    <div id="options"></div>
+    <button id="next-btn" disabled>Next</button>
   </div>
+
+  <div id="result" style="display:none;">
+    <h3>Your score: <span id="score"></span></h3>
+    <a href="leaderboard.html"><button>View Leaderboard</button></a>
+  </div>
+
+  <div id="leaderboard" style="margin-top: 20px;"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
