@@ -111,6 +111,14 @@ function showResult() {
   resultEl.style.display = "block";
   scoreEl.textContent = `${score} / ${quizData.length}`;
   
+  // Update the final progress bar
+  const finalProgress = (currentQuestion / quizData.length) * 100;
+  document.getElementById("progress-bar").style.width = `${finalProgress}%`;
+
+  // Display the final percentage score
+  const finalPercentage = Math.round((score / quizData.length) * 100);
+  document.getElementById("percentage").textContent = `You scored: ${finalPercentage}%`;
+
   // Prompt for name and save score
   const name = prompt("Enter your name to save your score:");
   if (name) {
