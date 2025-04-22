@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+</head>
+<body>
+  <h1>Leaderboard</h1>
+  <div id="leaderboard"></div>
+
+  <script>
+    function displayLeaderboard() {
+      const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+      const leaderboardEl = document.getElementById("leaderboard");
+      
+      leaderboardEl.innerHTML = "<h2>Top 5 Scores</h2>";
+      
+      leaderboard.forEach((entry, index) => {
+        leaderboardEl.innerHTML += `<p>${index + 1}. ${entry.name} - ${entry.score}</p>`;
+      });
+    }
+
+    displayLeaderboard();
+  </script>
+</body>
+</html>
