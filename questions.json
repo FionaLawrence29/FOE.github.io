@@ -23,5 +23,127 @@
     "question": "Which keyword is used to define a constant in C?",
     "options": ["define", "const", "constant", "let"],
     "answer": "const"
+  },
+  {
+    "question": "What is an algorithm?",
+    "options": ["A programming language", "A step-by-step procedure to solve a problem", "A type of variable", "A flowchart symbol"],
+    "answer": "A step-by-step procedure to solve a problem",
+    "explanation": "An algorithm is a well-defined procedure or set of instructions to solve a specific problem."
+  },
+  {
+    "question": "Which symbol is used in a flowchart to represent a decision?",
+    "options": ["Rectangle", "Oval", "Parallelogram", "Diamond"],
+    "answer": "Diamond",
+    "explanation": "The diamond symbol represents decision-making in a flowchart."
+  },
+  {
+    "question": "What does a rectangle represent in a flowchart?",
+    "options": ["Start/End", "Input/Output", "Process", "Decision"],
+    "answer": "Process",
+    "explanation": "A rectangle in a flowchart indicates a processing step."
+  },
+  {
+    "question": "Which of the following is a valid C identifier?",
+    "options": ["int", "main-function", "_value1", "3score"],
+    "answer": "_value1",
+    "explanation": "Identifiers must begin with a letter or underscore and cannot be a reserved keyword like 'int'."
+  },
+  {
+    "question": "Which section comes first in the structure of a C program?",
+    "options": ["Function Definition", "Main Function", "Header Files", "Declaration Section"],
+    "answer": "Header Files",
+    "explanation": "C programs begin with header file inclusion like `#include <stdio.h>`."
+  },
+  {
+    "question": "What is the data type of the value 3.14 in C?",
+    "options": ["int", "float", "char", "double"],
+    "answer": "float",
+    "explanation": "3.14 is a floating-point number, represented as 'float' in C."
+  },
+  {
+    "question": "What is the correct syntax for defining a constant in C?",
+    "options": ["int PI = 3.14;", "#define PI 3.14", "constant PI = 3.14;", "let PI = 3.14;"],
+    "answer": "#define PI 3.14",
+    "explanation": "C uses the `#define` preprocessor directive to declare constants."
+  },
+  {
+    "question": "Which data type is used to store a single character?",
+    "options": ["int", "float", "char", "string"],
+    "answer": "char",
+    "explanation": "The 'char' data type stores a single character."
+  },
+  {
+    "question": "Which part of a C program contains logic for execution?",
+    "options": ["Preprocessor directives", "Main function", "Comments", "Header file"],
+    "answer": "Main function",
+    "explanation": "The `main()` function is where execution starts in C."
+  },
+  {
+    "question": "Which of the following is a keyword in C?",
+    "options": ["for", "variable", "define", "begin"],
+    "answer": "for",
+    "explanation": "'for' is a loop keyword in C. 'define' is a preprocessor directive, not a keyword."
+  },
+  {
+    "question": "What is the purpose of a flowchart?",
+    "options": ["To write code", "To compile programs", "To visually represent an algorithm", "To run C programs"],
+    "answer": "To visually represent an algorithm",
+    "explanation": "Flowcharts help visualize logical flow before coding."
+  },
+  {
+    "question": "Which of the following is a correct variable declaration in C?",
+    "options": ["int 1x;", "float height;", "double-height;", "char = name;"],
+    "answer": "float height;",
+    "explanation": "Variable names cannot begin with digits or include hyphens."
+  },
+  {
+    "question": "Which keyword is used to return a value from a C function?",
+    "options": ["send", "return", "output", "yield"],
+    "answer": "return",
+    "explanation": "The 'return' keyword sends a value back from a function."
+  },
+  {
+    "question": "What is the default return type of `main()` in C?",
+    "options": ["int", "void", "char", "float"],
+    "answer": "int",
+    "explanation": "The `main()` function typically returns an integer (e.g., return 0;)."
+  },
+  {
+    "question": "Which flowchart symbol represents input/output?",
+    "options": ["Oval", "Rectangle", "Parallelogram", "Diamond"],
+    "answer": "Parallelogram",
+    "explanation": "Parallelogram is used to represent input/output in flowcharts."
+  },
+  {
+    "question": "What kind of data type is 'int' in C?",
+    "options": ["Floating point", "Integer", "Character", "String"],
+    "answer": "Integer",
+    "explanation": "'int' represents whole numbers in C."
+  },
+  {
+    "question": "Which constant is used to terminate a string in C?",
+    "options": ["\\0", "EOF", "NULL", "END"],
+    "answer": "\\0",
+    "explanation": "The null character '\\0' marks the end of a string."
+  },
+  {
+    "question": "What does the `#include` directive do in C?",
+    "options": ["Includes comments", "Includes a function", "Adds a header file", "Defines a variable"],
+    "answer": "Adds a header file",
+    "explanation": "`#include` tells the compiler to include the contents of a file before compilation."
+  },
+  {
+    "question": "What type of loop is used when the number of iterations is known?",
+    "options": ["while", "do-while", "for", "switch"],
+    "answer": "for",
+    "explanation": "'for' loops are ideal when the number of iterations is predetermined."
+  },
+  {
+    "question": "Which of the following is a valid constant declaration using `const`?",
+    "options": ["const int = 10;", "int const PI = 3.14;", "const float pi = 3.14;", "#const = 5;"],
+    "answer": "const float pi = 3.14;",
+    "explanation": "The `const` keyword declares a variable whose value cannot be changed."
   }
 ]
+
+
