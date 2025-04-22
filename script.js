@@ -104,7 +104,9 @@ nextBtn.addEventListener("click", () => {
   } else {
     showResult();
   }
+  updateProgress();
 });
+
 
 function showResult() {
   document.getElementById("question-container").style.display = "none";
